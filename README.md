@@ -21,7 +21,7 @@ dependencyResolutionManagement {
 Then add this dependency to your `build.gradle.kts` file:
 ```
 dependencies {
-  implementation("com.github.cristmasbox:GlyphConverter:1.6.0")
+  implementation("com.github.cristmasbox:GlyphConverter:1.7.0")
 }
 ```
 > [!NOTE]
@@ -51,5 +51,12 @@ Minor bug fixes. Now you can successfully convert this:
 ```
 N17:i*(p:t)*(t:p)*i:N17
 ```
+### 07.12.2025@1.7.0
+- updated dependencies
+- Custom exception for `glyphX` parsing added:
+`GlyphXParserException.java`
+- Support for page break and line break added:
+  - `<br/>`: `!`
+  - `<pbr/>`: `!!`
 ### latest Version
-`08.11.2025@1.6.0`
+`07.12.2025@1.7.0`

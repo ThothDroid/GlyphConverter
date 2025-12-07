@@ -10,8 +10,8 @@ android {
         applicationId = "com.blueapps.glyphconvert"
         minSdk = 24
         targetSdk = 36
-        versionCode = 160
-        versionName = "08.11.2025@1.6.0"
+        versionCode = 170
+        versionName = "07.12.2025@1.7.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
