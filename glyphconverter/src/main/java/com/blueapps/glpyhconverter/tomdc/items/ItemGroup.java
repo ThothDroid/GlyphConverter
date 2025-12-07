@@ -36,7 +36,7 @@ public class ItemGroup extends Item{
             if (node instanceof Element) {
 
                 Element child = (Element) node;
-                Item item = getItemFromElement(child);
+                Item item = getItemFromElement(child, false);
                 if (item != null) {
                     subItems.add(item);
                 }

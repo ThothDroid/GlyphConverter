@@ -1,5 +1,6 @@
 package com.blueapps.glpyhconverter.toglyphx;
 
+import static com.blueapps.glpyhconverter.toglyphx.exceptions.MdCParseException.ILLEGAL_ALPHA_NUMERIC_COMBINATION;
 import static com.blueapps.glpyhconverter.toglyphx.exceptions.MdCParseException.ILLEGAL_BETWEEN_BRACKET_CHARACTER;
 import static com.blueapps.glpyhconverter.toglyphx.exceptions.MdCParseException.ILLEGAL_BRACKET_POSITION;
 import static com.blueapps.glpyhconverter.toglyphx.exceptions.MdCParseException.ILLEGAL_BRACKET_PROPORTION;
@@ -7,9 +8,11 @@ import static com.blueapps.glpyhconverter.toglyphx.exceptions.MdCParseException.
 import static com.blueapps.glpyhconverter.toglyphx.exceptions.MdCParseException.ILLEGAL_CHARACTER_COMBINATION;
 import static com.blueapps.glpyhconverter.toglyphx.exceptions.MdCParseException.ILLEGAL_CHARACTER_COUNT;
 import static com.blueapps.glpyhconverter.toglyphx.exceptions.MdCParseException.ILLEGAL_END_CHARACTER;
+import static com.blueapps.glpyhconverter.toglyphx.exceptions.MdCParseException.ILLEGAL_ID_CHARACTER_COUNT;
 import static com.blueapps.glpyhconverter.toglyphx.exceptions.MdCParseException.ILLEGAL_START_CHARACTER;
 
 import com.blueapps.glpyhconverter.toglyphx.exceptions.MdCParseException;
+import com.blueapps.glpyhconverter.toglyphx.items.BreakItem;
 import com.blueapps.glpyhconverter.toglyphx.items.HorizontalGroup;
 import com.blueapps.glpyhconverter.toglyphx.items.Item;
 import com.blueapps.glpyhconverter.toglyphx.items.SimpleItem;
@@ -52,6 +55,10 @@ public class MdCToGlyphX {
 
         StringBuilder currentString = new StringBuilder();
         int mode = MODE_START;
+
+        // Replace \n and \t with whitespace
+        StringUtils.replaceChars(MdC, '\n', ' ');
+        StringUtils.replaceChars(MdC, '\t', ' ');
 
         // Iterate characters
         while (it.current() != CharacterIterator.DONE) {
@@ -212,6 +219,32 @@ public class MdCToGlyphX {
 
         }
 
+        // Check ids
+        int counter2 = 0;
+        for (String id: ids){
+            // Check '!' chars
+            if (StringUtils.containsAny(id, '!')) {
+                String checkId = StringUtils.remove(id, '!');
+                if (StringUtils.countMatches(id, '!') > 2) {
+                    throw new MdCParseException(String.format(ILLEGAL_ID_CHARACTER_COUNT, '!', StringUtils.countMatches(id, '!'), id));
+                } else if (!checkId.isEmpty()) {
+                    throw new MdCParseException(String.format(ILLEGAL_ALPHA_NUMERIC_COMBINATION, '!', id));
+                }
+
+                String sepBefore = separators.get(counter2);
+                String sepAfter = separators.get(counter2 + 1);
+                if (StringUtils.containsAny(sepBefore, '*') ||
+                        StringUtils.containsAny(sepAfter, '*')){
+                    throw new MdCParseException(String.format(ILLEGAL_CHARACTER_COMBINATION, '!', '*', sepBefore + id + sepAfter));
+                }
+                if (StringUtils.containsAny(sepBefore, ':') ||
+                        StringUtils.containsAny(sepAfter, ':')){
+                    throw new MdCParseException(String.format(ILLEGAL_CHARACTER_COMBINATION, '!', ':', sepBefore + id + sepAfter));
+                }
+            }
+            counter2++;
+        }
+
         // Check separators at start or end of MdC Code
         if (StringUtils.containsAny(separators.get(0), ':')){
             throw new MdCParseException(String.format(ILLEGAL_START_CHARACTER, ':', separators.get(0)));
@@ -234,12 +267,12 @@ public class MdCToGlyphX {
 
         log.log(Level.INFO, "Separators prepared: " + separators);
 
-        int counter2 = 0;
+        int counter3 = 0;
         StringBuilder finalString = new StringBuilder();
         for (String id: ids){
-            finalString.append(separators.get(counter2));
+            finalString.append(separators.get(counter3));
             finalString.append(id);
-            counter2++;
+            counter3++;
         }
 
         finalString.append(separators.get(separators.size() - 1));
@@ -270,7 +303,12 @@ public class MdCToGlyphX {
 
             ArrayList<String> items = new ArrayList<>(List.of(MdC.split("[- ]")));
             for (String item: items){
-                rootElement.appendChild(getElement(doc, item));
+                if (StringUtils.containsAny(item, '!')){
+                    BreakItem item1 = new BreakItem();
+                    rootElement.appendChild(item1.getElement(doc, item));
+                } else {
+                    rootElement.appendChild(getElement(doc, item));
+                }
             }
 
             return doc;
@@ -314,11 +352,15 @@ public class MdCToGlyphX {
 
 
     public static boolean isIdChar(char c){
-        return Character.isAlphabetic(c) || Character.isDigit(c);
+        return c == '!' ||
+                Character.isAlphabetic(c) ||
+                Character.isDigit(c);
     }
 
     public static boolean isSeperatorChar(char c){
         return c == ' ' ||
+                c == '\n' ||
+                c == '\t' ||
                 c == '-' ||
                 c == ':' ||
                 c == '*' ||

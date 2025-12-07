@@ -1,11 +1,16 @@
 package com.blueapps.glpyhconverter.tomdc;
 
+import static com.blueapps.glpyhconverter.GlyphConverter.XML_BREAK_TAG;
 import static com.blueapps.glpyhconverter.GlyphConverter.XML_H_TAG;
 import static com.blueapps.glpyhconverter.GlyphConverter.XML_ID_ATTRIBUTE;
+import static com.blueapps.glpyhconverter.GlyphConverter.XML_PAGE_BREAK_TAG;
 import static com.blueapps.glpyhconverter.GlyphConverter.XML_SIGN_TAG;
 import static com.blueapps.glpyhconverter.GlyphConverter.XML_V_TAG;
 import static com.blueapps.glpyhconverter.GlyphConverter.XML_ROOT_TAG;
+import static com.blueapps.glpyhconverter.tomdc.exceptions.GlyphXParserException.WRONG_ROOT_TAG;
 
+import com.blueapps.glpyhconverter.tomdc.exceptions.GlyphXParserException;
+import com.blueapps.glpyhconverter.tomdc.items.BreakItem;
 import com.blueapps.glpyhconverter.tomdc.items.HorizontalGroup;
 import com.blueapps.glpyhconverter.tomdc.items.Item;
 import com.blueapps.glpyhconverter.tomdc.items.SimpleItem;
@@ -66,7 +71,7 @@ public class GlyphXToMdC {
                         Node node = nodeList.item(i);
                         if (node instanceof Element) {
                             Element element = (Element) node;
-                            Item item = getItemFromElement(element);
+                            Item item = getItemFromElement(element, true);
                             if (item != null) {
                                 returnStructure.add(item);
                             }
@@ -79,7 +84,7 @@ public class GlyphXToMdC {
                         }
                     }
                 } else {
-                    log.log(Level.WARNING, "Wrong Root Element. Root Element should be '<\" + XML_ROOT_TAG + \">' in stead of '<\" + rootElement.getTagName() + \">'.");
+                    throw new GlyphXParserException(String.format(WRONG_ROOT_TAG, XML_ROOT_TAG, rootElement.getTagName()));
                 }
             }
         }
@@ -87,7 +92,7 @@ public class GlyphXToMdC {
         return returnStructure;
     }
 
-    public static Item getItemFromElement(Element element){
+    public static Item getItemFromElement(Element element, boolean root){
         if (Objects.equals(element.getTagName(), XML_SIGN_TAG)) {
 
             String id = element.getAttribute(XML_ID_ATTRIBUTE);
@@ -100,6 +105,14 @@ public class GlyphXToMdC {
         } else if (Objects.equals(element.getTagName(), XML_V_TAG)) {
 
             return new VerticalGroup(element);
+
+        } else if (root && Objects.equals(element.getTagName(), XML_PAGE_BREAK_TAG)){
+
+            return new BreakItem(true);
+
+        } else if (root && Objects.equals(element.getTagName(), XML_BREAK_TAG)){
+
+            return new BreakItem(false);
 
         }
 
