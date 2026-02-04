@@ -57,6 +57,7 @@ N17:i*(p:t)*(t:p)*i:N17
 - updated dependencies
 - Custom exception for `glyphX` parsing added:
 `GlyphXParserException.java`
+- Support for `\n` and `\t` added
 - Support for page break and line break added:
   - `<br/>`: `!`
   - `<pbr/>`: `!!`
