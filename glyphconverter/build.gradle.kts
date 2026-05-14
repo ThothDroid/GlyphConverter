@@ -16,14 +16,14 @@ publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
-            groupId = "com.github.cristmasbox"
+            groupId = "com.github.ThothDroid"
             artifactId = "glyphconverter"
             version = "1.7.0"
 
             pom {
                 name.set("GlpyhConverter")
                 description.set("A library for converting between MdC (Manuel de Codage) and GlyphX (Hieroglyph XML). Both are used for displaying egyptian hieroglyphs.")
-                url.set("https://github.com/cristmasbox/GlyphConverter/")
+                url.set("https://github.com/ThothDroid/GlyphConverter/")
                 licenses {
                     license {
                         name.set("GNU License V3")
@@ -32,7 +32,7 @@ publishing {
                 }
                 developers {
                     developer {
-                        id.set("cristmasbox")
+                        id.set("ThothDroid")
                         name.set("Georg Schierholt")
                     }
                 }
