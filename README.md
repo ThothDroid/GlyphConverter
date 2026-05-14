@@ -1,13 +1,13 @@
-[![](https://jitpack.io/v/cristmasbox/GlyphConverter.svg)](https://jitpack.io/#cristmasbox/GlyphConverter)
+[![](https://jitpack.io/v/ThothDroid/GlyphConverter.svg)](https://jitpack.io/#ThothDroid/GlyphConverter)
 
 # Glyph Converter
 A library for converting between MdC (Manuel de Codage) and GlyphX (Hieroglpyh XML). Both are used for displaying egyptian hieroglyphs.
 
-*This library is part of the [Egyptian Writer](https://github.com/cristmasbox/Egyptian_Writer) Android App.*
+*This library is part of the [Egyptian Writer](https://github.com/ThothDroid/Egyptian_Writer) Android App.*
 
 > [!TIP]
-> If you want to render Hieroglyphs in Android try the [Egyptian Writer](https://github.com/cristmasbox/Egyptian_Writer) Android App or these libraries: \
-> [THOTH](https://github.com/cristmasbox/THOTH) and [MAAT](https://github.com/cristmasbox/MAAT)
+> If you want to render Hieroglyphs in Android try the [Egyptian Writer](https://github.com/ThothDroid/Egyptian_Writer) Android App or these libraries: \
+> [THOTH](https://github.com/ThothDroid/THOTH) and [MAAT](https://github.com/ThothDroid/MAAT)
 
 ## Implementation with jitpack
 Add this to your `settings.gradle.kts` at the end of repositories:
@@ -23,11 +23,11 @@ dependencyResolutionManagement {
 Then add this dependency to your `build.gradle.kts` file:
 ```
 dependencies {
-  implementation("com.github.cristmasbox:GlyphConverter:1.7.0")
+  implementation("com.github.ThothDroid:GlyphConverter:1.7.0")
 }
 ```
 > [!NOTE]
-> For the implementation for other build systems like `Groovy` see [here](https://jitpack.io/#cristmasbox/GlyphConverter/)
+> For the implementation for other build systems like `Groovy` see [here](https://jitpack.io/#ThothDroid/GlyphConverter/)
 
 ## Implementation with `.jar` file
 Download the `GlpyhConverter_versionname.jar` file from this repository, create a `libs` folder in your project directory and paste the file there. Then add this dependency to your `build.gradle.kts` file:
