@@ -1,4 +1,12 @@
-[![](https://jitpack.io/v/ThothDroid/GlyphConverter.svg)](https://jitpack.io/#ThothDroid/GlyphConverter)
+[![GitHub Repo stars](https://img.shields.io/github/stars/ThothDroid/GlyphConverter?style=for-the-badge&logo=github&color=yellowgreen)](https://github.com/ThothDroid/GlyphConverter)
+[![Static part of Badge](https://img.shields.io/badge/Part%20of-Egyptian%20Writer%20App-%233DDC84?style=for-the-badge&logo=android&logoColor=white)](https://github.com/ThothDroid/Egyptian_Writer/wiki)
+[![GitHub License](https://img.shields.io/github/license/ThothDroid/GlyphConverter?style=for-the-badge&logo=gnu&color=yellow)](https://github.com/ThothDroid/GlyphConverter?tab=GPL-3.0-1-ov-file)
+[![GitHub forks](https://img.shields.io/github/forks/ThothDroid/GlyphConverter?style=for-the-badge&logo=git&logoColor=white&color=%23F05032)](https://github.com/ThothDroid/GlyphConverter)
+\
+[![jitpack](https://jitpack.io/v/ThothDroid/GlyphConverter.svg)](https://jitpack.io/#ThothDroid/GlyphConverter)
+[![Static wiki Badge](https://img.shields.io/badge/Egyptian%20Writer-WIKI-yellow?style=flat&logo=gitbook&logoColor=white)](https://github.com/ThothDroid/Egyptian_Writer/wiki)
+[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ThothDroid/GlyphConverter?color=blue)](https://github.com/ThothDroid/GlpyhConverter)
+[![GitHub Release](https://img.shields.io/github/v/release/ThothDroid/GlyphConverter?color=%23F05032)](https://github.com/ThothDroid/GlpyhConverter)
 
 # Glyph Converter
 A library for converting between MdC (Manuel de Codage) and GlyphX (Hieroglpyh XML). Both are used for displaying egyptian hieroglyphs.
