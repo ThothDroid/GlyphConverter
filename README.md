@@ -1,5 +1,5 @@
 [![GitHub Repo stars](https://img.shields.io/github/stars/ThothDroid/GlyphConverter?style=for-the-badge&logo=github&color=yellowgreen)](https://github.com/ThothDroid/GlyphConverter)
-[![Static part of Badge](https://img.shields.io/badge/Part%20of-Egyptian%20Writer%20App-%233DDC84?style=for-the-badge&logo=android&logoColor=white)](https://github.com/ThothDroid/Egyptian_Writer/wiki)
+[![Static part of Badge](https://img.shields.io/badge/Part%20of-Egyptian%20Writer%20App-%233DDC84?style=for-the-badge&logo=android&logoColor=white)](https://github.com/ThothDroid/Egyptian_Writer/)
 [![GitHub License](https://img.shields.io/github/license/ThothDroid/GlyphConverter?style=for-the-badge&logo=gnu&color=yellow)](https://github.com/ThothDroid/GlyphConverter?tab=GPL-3.0-1-ov-file)
 [![GitHub forks](https://img.shields.io/github/forks/ThothDroid/GlyphConverter?style=for-the-badge&logo=git&logoColor=white&color=%23F05032)](https://github.com/ThothDroid/GlyphConverter)
 \
